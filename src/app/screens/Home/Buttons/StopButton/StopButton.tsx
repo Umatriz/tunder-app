@@ -1,6 +1,6 @@
 import { FC } from "react"
 
-import { IoPlayOutline } from "react-icons/io5"
+import { IoPauseCircleOutline } from "react-icons/io5"
 
 import styles from "../Buttons.module.css"
 
@@ -10,7 +10,7 @@ const StopButton: FC = () => {
   return (
     <div>
       <button className={styles.button}>
-        <IoPlayOutline />
+        <IoPauseCircleOutline />
       </button>
     </div>
   )
