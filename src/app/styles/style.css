@@ -1,11 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
 
   color: #0f0f0f;
-  background-color: #f6f6f6;
+  background-color: #E8EAE6;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,14 +16,14 @@
 }
 
 * {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
 a {
-  text-decoration: inherit;
+  text-decoration: none;
 }
 
 button {
@@ -31,5 +32,11 @@ button {
 
 input,
 button {
-  outline: none;
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
 }

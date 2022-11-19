@@ -9,11 +9,13 @@
 //     format!("Hello, {}! You've been greeted from Rust!", name)
 // }
 
-mod func;
+pub mod func;
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![])
+        .invoke_handler(tauri::generate_handler![
+            
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

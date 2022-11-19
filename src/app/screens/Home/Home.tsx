@@ -1,9 +1,13 @@
+import { FC } from "react";
+import Timer from "./Timer/Timer"
+import Buttons from "./Buttons/Buttons"
+
 type Props = {};
 
-const HomePage = (props: Props) => {
+const HomePage: FC = ({}: Props) => {
   return (
     <div>
-      <span>app</span>
+      <Timer />
     </div>
   );
 };
