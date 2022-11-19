@@ -1,8 +1,10 @@
 import { FC, useEffect, useState, useRef } from 'react';
 import ProgressBar from 'react-customizable-progressbar'
 
+import PlayButton from '../Buttons/PlayButton/PlayButton';
+import StopButton from '../Buttons/StopButton/StopButton';
+
 import styles from "./Timer.module.css"
-import Buttons from "../Buttons/Buttons"
 
 type Props = {}
 
@@ -76,7 +78,9 @@ const Timer: FC = ({}: Props) => {
           <div>5</div>
         </div>
       </ProgressBar>
-      <Buttons pause={isPaused} setPause={setIsPaused} />
+      {
+        isPaused ? <PlayButton /> : <StopButton />
+      }
     </div>
   )
 }
