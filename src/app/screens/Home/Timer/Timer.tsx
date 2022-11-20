@@ -19,14 +19,9 @@ const Timer: FC = ({}: Props) => {
   const isPausedRef = useRef(isPaused)
   const modeRef = useRef(mode)
   
-  const totalSeconds = secondsLeft
-
-  const initTimer = () => {
-    setSecondsLeft(25 * 60)
-  }
-  
   const tick = () => {
-    setSecondsLeft(secondsLeft - 1)
+    secondsLeftRef.current--
+    setSecondsLeft(secondsLeftRef.current)
   }
 
   const swichMode = () => {
@@ -34,14 +29,18 @@ const Timer: FC = ({}: Props) => {
     const nextSecond = (nextMode === 'work' ? 25 * 60 : 5 * 60)
 
     setMode(nextMode)
+    modeRef.current = nextMode;
+
     setSecondsLeft(nextSecond)
+    secondsLeftRef.current = nextSecond;
   }
 
   useEffect(() => {
-    initTimer()
+    secondsLeftRef.current = 25 * 60;
+    setSecondsLeft(secondsLeftRef.current);
 
-    setInterval(() => {
-      if (isPausedRef) {
+    const interval = setInterval(() => {
+      if (isPausedRef.current) {
         return
       }
 
@@ -51,20 +50,26 @@ const Timer: FC = ({}: Props) => {
 
       tick()
     }, 1000)
+
+    return () => clearInterval(interval);
+
   }, [])
 
-  useEffect(() => {
-    setStep(totalSeconds - secondsLeft)
-  }, [secondsLeft])
+  const totalSeconds = mode === 'work'
+    ? 25 * 60
+    : 5 * 60;
 
-  const steps = secondsLeft
+  const percentage = Math.round(secondsLeft / totalSeconds * 100);
+
+  const minutes = Math.floor(secondsLeft / 60);
+  let seconds = secondsLeft % 60;
 
   return (
     <div className={styles.container}>
       <ProgressBar
-        progress={step}
+        progress={percentage}
         radius={100}
-        steps={steps}
+        steps={100}
         strokeColor='#7C9473'
         strokeWidth={3}
         trackStrokeColor='#CDD0CB'
@@ -75,11 +80,19 @@ const Timer: FC = ({}: Props) => {
         pointerFillColor='#E8EAE6'
       >
         <div className={styles.indicator}>
-          <div>5</div>
+          <div>{minutes + ':' + seconds}</div>
         </div>
       </ProgressBar>
       {
-        isPaused ? <PlayButton /> : <StopButton />
+        isPaused ?
+        <PlayButton onClick={() => {
+          setIsPaused(false)
+          isPausedRef.current = false
+        }} /> :
+        <StopButton onClick={() => {
+          setIsPaused(true)
+          isPausedRef.current = true
+        }} />
       }
     </div>
   )

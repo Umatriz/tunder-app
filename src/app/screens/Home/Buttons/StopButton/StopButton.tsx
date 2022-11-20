@@ -1,15 +1,17 @@
-import { FC } from "react"
+import { FC, MouseEventHandler } from "react"
 
 import { IoPauseCircleOutline } from "react-icons/io5"
 
 import styles from "../Buttons.module.css"
 
-type Props = {}
+type Props = {
+  onClick: MouseEventHandler<HTMLButtonElement>;
+}
 
-const StopButton: FC = () => {
+const StopButton: FC<Props> = (props) => {
   return (
     <div>
-      <button className={styles.button}>
+      <button className={styles.button} {...props}>
         <IoPauseCircleOutline />
       </button>
     </div>

@@ -1,15 +1,17 @@
-import { FC } from "react"
+import { FC, MouseEventHandler } from "react"
 
 import { IoPlayOutline } from "react-icons/io5"
 
 import styles from "../Buttons.module.css"
 
-type Props = {}
+type Props = {
+  onClick: MouseEventHandler<HTMLButtonElement>;
+}
 
-const PlayButton: FC = () => {
+const PlayButton: FC<Props> = (props) => {
   return (
     <div>
-      <button className={styles.button}>
+      <button className={styles.button} {...props}>
         <IoPlayOutline />
       </button>
     </div>
